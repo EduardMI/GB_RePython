@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <table class="table" style="margin-top:30px">
+        <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Поставщик</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.name }}</td>
+                <td>{{ object.price }} руб./{{ object.get_unit_display }}</td>
+                <td>{{ object.supplier }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
