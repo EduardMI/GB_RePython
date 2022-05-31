@@ -10,12 +10,14 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'main:main' %}">Home</a>
         </li>
+        {% for category in category_list %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'main:category' category.pk %}">{{ category.name }}</a>
+        </li>
+        {% endfor %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'admin:index' %}">Админка</a>
         </li>
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="#">Pricing</a>-->
-<!--        </li>-->
 <!--        <li class="nav-item">-->
 <!--          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
 <!--        </li>-->
