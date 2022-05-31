@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.timezone import now
 
+from goodsapp.models.category import Category
+
 
 class Goods(models.Model):
     PIECE = 'PI'
@@ -15,6 +17,7 @@ class Goods(models.Model):
     price = models.DecimalField(verbose_name='Цена', max_digits=8, decimal_places=2, default=0)
     unit = models.CharField(verbose_name='Ед. измерения', choices=UNITS, max_length=2)
     supplier = models.CharField(verbose_name='Поставщик', max_length=64)
+    category = models.ManyToManyField(Category)
 
     def __str__(self):
         return self.name
@@ -22,3 +25,4 @@ class Goods(models.Model):
     class Meta:
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
+        ordering = ['-create_date']
