@@ -1,3 +1,5 @@
+from django.contrib.sites.managers import CurrentSiteManager
+from django.contrib.sites.models import Site
 from django.db import models
 from django.utils.timezone import now
 
@@ -18,6 +20,10 @@ class Goods(models.Model):
     unit = models.CharField(verbose_name='Ед. измерения', choices=UNITS, max_length=2)
     supplier = models.CharField(verbose_name='Поставщик', max_length=64)
     category = models.ManyToManyField(Category)
+    site = models.ManyToManyField(Site)
+
+    objects = models.Manager()
+    on_site = CurrentSiteManager('site')
 
     def __str__(self):
         return self.name
