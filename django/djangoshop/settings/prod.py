@@ -8,6 +8,7 @@ DEBUG = False
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
 
 STATIC_ROOT = BASE_DIR / '..' / 'nginx' / 'static'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

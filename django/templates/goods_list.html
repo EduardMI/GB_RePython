@@ -9,6 +9,7 @@
                 <th scope="col">Цена</th>
                 <th scope="col">Поставщик</th>
                 <th scope="col">Категория</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,11 @@
                     {% for category in object.category.all %}
                     {{category}}
                     {% endfor %}
+                </td>
+                <td>
+                    {% if object.image %}
+                    <img src="{{ object.image.url}}" alt="pic" width="100">
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

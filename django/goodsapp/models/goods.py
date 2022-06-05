@@ -21,6 +21,7 @@ class Goods(models.Model):
     supplier = models.CharField(verbose_name='Поставщик', max_length=64)
     category = models.ManyToManyField(Category)
     site = models.ManyToManyField(Site)
+    image = models.ImageField('Изображение', upload_to='image_goods/', null=True)
 
     objects = models.Manager()
     on_site = CurrentSiteManager('site')
