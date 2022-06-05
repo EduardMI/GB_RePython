@@ -1,0 +1,40 @@
+version: '4'
+
+services:
+  db:
+    image: postgres:13.7
+    privileged: true
+    restart: always
+    ports:
+      - "54325:5432"
+    environment:
+      POSTGRES_DB: djangoshop
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: qwerty
+      PGDATA: "/var/lib/postgres/data/pgdata"
+    volumes:
+      - .:/var/lib/postgres/data
+
+  backend:
+    build:
+      context: ./django
+    privileged: true
+    restart: always
+    expose:
+      - 8000
+    command: bash -c "
+      python manage.py migrate &&
+      gunicorn djangoshop.wsgi -b 0.0.0.0:8000
+      "
+    environment:
+      DJANGO_SETTINGS_MODULE: djangoshop.settings.site_1
+    depends_on:
+      - db
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "8002:8002"
+    depends_on:
+      - backend
